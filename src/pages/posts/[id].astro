@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts", ({ data }) => !data.draft);
@@ -10,26 +11,107 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>{post.data.title} — Stefan Zivkovic</title>
-  </head>
-  <body>
-    <a href="/">← Back</a>
-    <article>
-      <h1>{post.data.title}</h1>
-      <time datetime={post.data.date.toISOString()}>
-        {
-          post.data.date.toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })
-        }
-      </time>
+<Layout title={`${post.data.title} — Stefan Zivkovic`}>
+  <nav class="mb-12">
+    <a
+      href="/"
+      class="font-mono text-sm transition-colors"
+      style="color: var(--color-muted)"
+      onmouseover="this.style.color='var(--color-text)'"
+      onmouseout="this.style.color='var(--color-muted)'"
+    >
+      ← back
+    </a>
+  </nav>
+
+  <article>
+    <header class="mb-10">
+      <h1 class="text-2xl font-semibold leading-tight tracking-tight">
+        {post.data.title}
+      </h1>
+      <div class="mt-3 flex flex-wrap items-center gap-3">
+        <time
+          datetime={post.data.date.toISOString()}
+          class="font-mono text-xs"
+          style="color: var(--color-muted)"
+        >
+          {
+            post.data.date.toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })
+          }
+        </time>
+        <ul class="flex flex-wrap gap-2">
+          {
+            post.data.tags.map((tag) => (
+              <li
+                class="font-mono text-xs px-2 py-0.5 rounded"
+                style="background-color: var(--color-surface); color: var(--color-muted); border: 1px solid var(--color-border)"
+              >
+                #{tag}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </header>
+
+    <div class="prose">
       <Content />
-    </article>
-  </body>
-</html>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .prose {
+    color: var(--color-text);
+    max-width: none;
+  }
+  .prose p {
+    margin-bottom: 1.25rem;
+    line-height: 1.8;
+  }
+  .prose h2,
+  .prose h3 {
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+  .prose a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prose code {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+  }
+  .prose pre {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    overflow-x: auto;
+    margin-bottom: 1.25rem;
+  }
+  .prose pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 0.875rem;
+  }
+  .prose blockquote {
+    border-left: 2px solid var(--color-accent);
+    padding-left: 1rem;
+    color: var(--color-muted);
+    font-style: italic;
+    margin-bottom: 1.25rem;
+  }
+</style>
