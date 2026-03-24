@@ -51,7 +51,8 @@ import Layout from "../layouts/Layout.astro";
     customInput.addEventListener("input", () => {
       const pagefindInput = document.querySelector(".pagefind-ui__search-input");
       if (pagefindInput) {
-        pagefindInput.value = customInput.value;
+        const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+        nativeInputValueSetter.call(pagefindInput, customInput.value);
         pagefindInput.dispatchEvent(new Event("input", { bubbles: true }));
       }
     });
