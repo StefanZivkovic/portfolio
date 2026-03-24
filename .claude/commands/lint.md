@@ -8,11 +8,13 @@ description: Run oxlint on the project
 Run the linter and report any issues.
 
 If a `lint` script exists in package.json, run:
+
 ```
 npm run lint
 ```
 
 Otherwise run oxlint directly:
+
 ```
 npx oxlint@latest src/
 ```

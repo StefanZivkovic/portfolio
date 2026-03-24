@@ -5,9 +5,11 @@ Personal content site. Minimal, techy, dark-first.
 ## Pages
 
 ### `/` — Home
+
 Single page. Grid of cards, one per post. No separate blog index.
 
 Each card shows:
+
 - Title
 - Date
 - Tags (clickable — filters cards)
@@ -16,9 +18,11 @@ Each card shows:
 Clicking a card navigates to the full post.
 
 ### `/posts/[slug]` — Post
+
 Full post content. Rendered from Markdown/MDX.
 
 ### `/search` — Search
+
 Global search across all post content (title, tags, body).
 
 ## Content Schema
@@ -37,17 +41,17 @@ Post frontmatter (Astro content collection):
 
 ## Features
 
-| Feature | Status |
-|---|---|
-| Card grid on home | in scope |
-| Tag filtering (client-side) | in scope |
-| Global search | in scope |
-| RSS feed (`/rss.xml`) | in scope |
-| Dark mode (dark-first) | in scope |
-| Cover images | out of scope (for now) |
-| Comments | out of scope |
-| About page | out of scope (for now) |
-| Pagination | out of scope (for now) |
+| Feature                     | Status                 |
+| --------------------------- | ---------------------- |
+| Card grid on home           | in scope               |
+| Tag filtering (client-side) | in scope               |
+| Global search               | in scope               |
+| RSS feed (`/rss.xml`)       | in scope               |
+| Dark mode (dark-first)      | in scope               |
+| Cover images                | out of scope (for now) |
+| Comments                    | out of scope           |
+| About page                  | out of scope (for now) |
+| Pagination                  | out of scope (for now) |
 
 ## Design Direction
 
