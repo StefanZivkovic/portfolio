@@ -8,5 +8,10 @@ export default defineConfig({
   site: "https://stefanzivkovic.dev",
   vite: {
     plugins: [tailwindcss()],
+    build: {
+      rollupOptions: {
+        external: ["/pagefind/pagefind-ui.js"],
+      },
+    },
   },
 });

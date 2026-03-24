@@ -1,0 +1,53 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Search — Stefan Zivkovic">
+  <header class="mb-12">
+    <a
+      href="/"
+      class="font-mono text-sm transition-colors"
+      style="color: var(--color-muted)"
+      onmouseover="this.style.color='var(--color-text)'"
+      onmouseout="this.style.color='var(--color-muted)'"
+    >
+      ← back
+    </a>
+    <h1 class="mt-8 text-2xl font-semibold tracking-tight">Search</h1>
+  </header>
+
+  <div id="search"></div>
+</Layout>
+
+<style is:global>
+  .pagefind-ui {
+    --pagefind-ui-scale: 0.9;
+    --pagefind-ui-primary: var(--color-accent);
+    --pagefind-ui-text: var(--color-text);
+    --pagefind-ui-background: var(--color-surface);
+    --pagefind-ui-border: var(--color-border);
+    --pagefind-ui-tag: var(--color-bg);
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: 8px;
+    --pagefind-ui-font: inherit;
+  }
+</style>
+
+<script is:inline>
+  const script = document.createElement("script");
+  script.src = "/pagefind/pagefind-ui.js";
+  script.onload = () => {
+    new PagefindUI({
+      element: "#search",
+      showSubResults: false,
+      resetStyles: true,
+    });
+  };
+  script.onerror = () => {
+    const el = document.getElementById("search");
+    if (el)
+      el.innerHTML =
+        '<p style="color:var(--color-muted);font-size:0.875rem">Search index not available in dev mode. Run <code style="font-family:monospace">npm run build && npm run preview</code> to test search.</p>';
+  };
+  document.head.appendChild(script);
+</script>
