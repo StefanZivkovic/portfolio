@@ -1,44 +1,62 @@
 ---
 import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
 
 const posts = (await getCollection("posts", ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Stefan Zivkovic</title>
-  </head>
-  <body>
-    <main>
-      <h1>Stefan Zivkovic</h1>
-      <ul>
-        {
-          posts.map((post) => (
-            <li>
-              <a href={`/posts/${post.id}`}>
-                <h2>{post.data.title}</h2>
-                <time datetime={post.data.date.toISOString()}>
-                  {post.data.date.toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </time>
-                <ul>
-                  {post.data.tags.map((tag) => (
-                    <li>{tag}</li>
-                  ))}
-                </ul>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </main>
-  </body>
-</html>
+<Layout title="Stefan Zivkovic">
+  <header class="mb-16">
+    <p class="font-mono text-sm" style="color: var(--color-accent)">
+      stefanzivkovic.dev
+    </p>
+    <h1 class="mt-2 text-2xl font-semibold tracking-tight">Stefan Zivkovic</h1>
+    <p class="mt-2 text-sm" style="color: var(--color-muted)">
+      Software engineer. Writing about code, systems, and whatever else seems
+      worth exploring.
+    </p>
+  </header>
+
+  <ul class="space-y-3">
+    {
+      posts.map((post) => (
+        <li>
+          <a
+            href={`/posts/${post.id}`}
+            class="group block rounded-lg p-5 transition-colors"
+            style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
+            onmouseover="this.style.borderColor='var(--color-accent)'"
+            onmouseout="this.style.borderColor='var(--color-border)'"
+          >
+            <div class="flex items-start justify-between gap-4">
+              <h2 class="font-medium leading-snug">{post.data.title}</h2>
+              <time
+                datetime={post.data.date.toISOString()}
+                class="font-mono text-xs whitespace-nowrap"
+                style="color: var(--color-muted)"
+              >
+                {post.data.date.toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </time>
+            </div>
+            <ul class="mt-3 flex flex-wrap gap-2">
+              {post.data.tags.map((tag) => (
+                <li
+                  class="font-mono text-xs px-2 py-0.5 rounded"
+                  style="background-color: var(--color-bg); color: var(--color-muted); border: 1px solid var(--color-border)"
+                >
+                  #{tag}
+                </li>
+              ))}
+            </ul>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Layout>
