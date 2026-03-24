@@ -20,9 +20,20 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
 
 <Layout title="Stefan Zivkovic">
   <header class="mb-16">
-    <p class="font-mono text-sm" style="color: var(--color-accent)">
-      stefanzivkovic.dev
-    </p>
+    <div class="flex items-center justify-between">
+      <p class="font-mono text-sm" style="color: var(--color-accent)">
+        stefanzivkovic.dev
+      </p>
+      <a
+        href="/search"
+        class="font-mono text-xs transition-colors"
+        style="color: var(--color-muted)"
+        onmouseover="this.style.color='var(--color-text)'"
+        onmouseout="this.style.color='var(--color-muted)'"
+      >
+        search
+      </a>
+    </div>
     <h1 class="mt-2 text-2xl font-semibold tracking-tight">Stefan Zivkovic</h1>
     <p class="mt-2 text-sm" style="color: var(--color-muted)">
       Software engineer. Writing about code, systems, and whatever else seems
