@@ -26,12 +26,15 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
       </p>
       <a
         href="/search"
-        class="font-mono text-xs transition-colors"
+        aria-label="Search"
+        class="transition-colors"
         style="color: var(--color-muted)"
         onmouseover="this.style.color='var(--color-text)'"
         onmouseout="this.style.color='var(--color-muted)'"
       >
-        search
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
       </a>
     </div>
     <h1 class="mt-2 text-2xl font-semibold tracking-tight">Stefan Zivkovic</h1>

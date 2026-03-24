@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Search — Stefan Zivkovic">
-  <header class="mb-12">
+  <header class="mb-10">
     <a
       href="/"
       class="font-mono text-sm transition-colors"
@@ -14,6 +14,19 @@ import Layout from "../layouts/Layout.astro";
       ← back
     </a>
     <h1 class="mt-8 text-2xl font-semibold tracking-tight">Search</h1>
+    <div class="mt-4 flex items-center gap-3 rounded-lg px-4 py-3" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-muted); flex-shrink: 0;">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+      </svg>
+      <input
+        id="search-input"
+        type="text"
+        placeholder="Search posts..."
+        autofocus
+        class="w-full bg-transparent outline-none text-sm"
+        style="color: var(--color-text); caret-color: var(--color-accent);"
+      />
+    </div>
   </header>
 
   <div id="search"></div>
