@@ -14,6 +14,8 @@ const posts = await Promise.all(
 );
 
 posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
 ---
 
 <Layout title="Stefan Zivkovic">
@@ -28,10 +30,31 @@ posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
     </p>
   </header>
 
-  <ul class="space-y-3">
+  <div class="mb-6 flex flex-wrap gap-2">
+    <button
+      data-tag-filter="all"
+      class="tag-filter font-mono text-xs px-2 py-0.5 rounded transition-colors active"
+      style="background-color: var(--color-accent); color: #fff; border: 1px solid var(--color-accent)"
+    >
+      all
+    </button>
+    {
+      allTags.map((tag) => (
+        <button
+          data-tag-filter={tag}
+          class="tag-filter font-mono text-xs px-2 py-0.5 rounded transition-colors"
+          style="background-color: var(--color-bg); color: var(--color-muted); border: 1px solid var(--color-border)"
+        >
+          #{tag}
+        </button>
+      ))
+    }
+  </div>
+
+  <ul class="space-y-3" id="post-list">
     {
       posts.map((post) => (
-        <li>
+        <li data-tags={post.data.tags.join(",")}>
           <a
             href={`/posts/${post.id}`}
             class="group block rounded-lg p-5 transition-colors"
@@ -71,3 +94,33 @@ posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
     }
   </ul>
 </Layout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>(".tag-filter");
+  const items = document.querySelectorAll<HTMLLIElement>("#post-list > li");
+
+  function setActive(tag: string) {
+    buttons.forEach((btn) => {
+      const isActive = btn.dataset.tagFilter === tag;
+      btn.style.backgroundColor = isActive
+        ? "var(--color-accent)"
+        : "var(--color-bg)";
+      btn.style.color = isActive ? "#fff" : "var(--color-muted)";
+      btn.style.borderColor = isActive
+        ? "var(--color-accent)"
+        : "var(--color-border)";
+    });
+
+    items.forEach((item) => {
+      const tags = item.dataset.tags?.split(",") ?? [];
+      item.style.display =
+        tag === "all" || tags.includes(tag) ? "" : "none";
+    });
+  }
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      setActive(btn.dataset.tagFilter ?? "all");
+    });
+  });
+</script>
