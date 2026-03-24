@@ -48,14 +48,18 @@ import Layout from "../layouts/Layout.astro";
     });
 
     const customInput = document.getElementById("search-input");
-    customInput.addEventListener("input", () => {
+
+    const observer = new MutationObserver(() => {
       const pagefindInput = document.querySelector(".pagefind-ui__search-input");
       if (pagefindInput) {
-        const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
-        nativeInputValueSetter.call(pagefindInput, customInput.value);
-        pagefindInput.dispatchEvent(new Event("input", { bubbles: true }));
+        observer.disconnect();
+        customInput.addEventListener("input", () => {
+          pagefindInput.value = customInput.value;
+          pagefindInput.dispatchEvent(new Event("input", { bubbles: true }));
+        });
       }
     });
+    observer.observe(document.getElementById("search"), { childList: true, subtree: true });
   };
   script.onerror = () => {
     const el = document.getElementById("search");
