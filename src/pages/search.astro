@@ -31,28 +31,20 @@ import Layout from "../layouts/Layout.astro";
   <div id="search"></div>
 </Layout>
 
-<style is:global>
-  .pagefind-ui__form {
-    display: none !important;
-  }
-</style>
-
 <script is:inline>
   const script = document.createElement("script");
-  script.src = "/pagefind/pagefind-ui.js";
+  script.src = "/pagefind/pagefind-modular-ui.js";
   script.onload = () => {
-    const ui = new PagefindUI({
-      element: "#search",
-      showSubResults: false,
-      resetStyles: true,
+    const instance = new PagefindModularUI.Instance();
+    const input = new PagefindModularUI.Input({
+      inputElement: "#search-input",
     });
+    const summary = new PagefindModularUI.Summary();
+    const resultList = new PagefindModularUI.ResultList({ containerElement: "#search" });
 
-    const input = document.getElementById("search-input");
-    if (input) {
-      input.addEventListener("input", () => {
-        ui.triggerSearch(input.value);
-      });
-    }
+    instance.add(input);
+    instance.add(summary);
+    instance.add(resultList);
   };
   script.onerror = () => {
     const el = document.getElementById("search");
