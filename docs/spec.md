@@ -43,15 +43,37 @@ Post frontmatter (Astro content collection):
 
 | Feature                     | Status                 |
 | --------------------------- | ---------------------- |
-| Card grid on home           | in scope               |
-| Tag filtering (client-side) | in scope               |
-| Global search               | in scope               |
-| RSS feed (`/rss.xml`)       | in scope               |
-| Dark mode (dark-first)      | in scope               |
+| Card grid on home           | done                   |
+| Tag filtering (client-side) | done                   |
+| Global search               | done                   |
+| RSS feed (`/rss.xml`)       | done                   |
+| Dark mode (dark-first)      | done                   |
 | Cover images                | out of scope (for now) |
 | Comments                    | out of scope           |
 | About page                  | out of scope (for now) |
 | Pagination                  | out of scope (for now) |
+
+## Remaining Work
+
+### Deployment
+
+- [ ] Connect repo to Vercel
+- [ ] Set build command: `npm run build`
+- [ ] Set output directory: `dist`
+- [ ] Set Node version: `>=22.12.0`
+- [ ] Verify search works on production (Pagefind runs at build time on Vercel)
+- [ ] Point custom domain `stefanzivkovic.dev` to Vercel
+
+### Polish
+
+- [ ] 404 page (`src/pages/404.astro`)
+- [ ] Basic OG/social meta tags (title, description, og:url) in Layout
+- [ ] Verify RSS feed end-to-end on production
+
+### Content
+
+- [ ] Replace dummy posts with real content
+- [ ] Review search result styling against site theme
 
 ## Design Direction
 
