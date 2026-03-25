@@ -3,6 +3,7 @@
     "allow": [
       "Bash(git:*)",
       "Bash(git reset --hard:*)",
+      "Bash(git fetch --prune:*)",
       "Bash(npm:*)",
       "Bash(npx:*)",
       "Bash(gh:*)"
