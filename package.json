@@ -9,6 +9,7 @@
     "dev": "astro dev",
     "build": "astro build && pagefind --site dist",
     "preview": "astro preview",
+    "bp": "npm run build && npm run preview",
     "astro": "astro",
     "lint": "oxlint src/",
     "format": "prettier --write .",
