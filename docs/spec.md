@@ -57,12 +57,12 @@ Post frontmatter (Astro content collection):
 
 ### Deployment
 
-- [ ] Connect repo to Vercel
-- [ ] Set build command: `npm run build`
-- [ ] Set output directory: `dist`
-- [ ] Set Node version: `>=22.12.0`
+- [x] Connect repo to Vercel
+- [x] Set build command: `npm run build`
+- [x] Set output directory: `dist`
+- [x] Set Node version: `>=22.12.0`
+- [x] Point custom domain `stefanzivkovic.dev` to Vercel
 - [ ] Verify search works on production (Pagefind runs at build time on Vercel)
-- [ ] Point custom domain `stefanzivkovic.dev` to Vercel
 
 ### Polish
 
