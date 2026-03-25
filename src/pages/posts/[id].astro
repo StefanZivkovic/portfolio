@@ -11,9 +11,10 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 const wordCount = post.body?.split(/\s+/).filter(Boolean).length ?? 0;
 const readingTime = Math.max(1, Math.round(wordCount / 200));
+const description = post.data.description ?? post.body?.split(/\s+/).slice(0, 25).join(" ") + "...";
 ---
 
-<Layout title={`${post.data.title} — Stefan Zivkovic`}>
+<Layout title={`${post.data.title} — Stefan Zivkovic`} description={description}>
   <nav class="mb-12">
     <a
       href="/"
