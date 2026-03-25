@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(gh:*)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -c \"import sys,json,os; data=json.load(sys.stdin); f=data.get('tool_input',{}).get('file_path',''); f and os.system(f'npx prettier --write \\\"{f}\\\" 2>/dev/null')\" 2>/dev/null || true",
+            "statusMessage": "Formatting..."
+          },
+          {
+            "type": "command",
+            "command": "python3 -c \"import sys,json,os; data=json.load(sys.stdin); f=data.get('tool_input',{}).get('file_path',''); '/src/' in f and os.system(f'npx oxlint \\\"{f}\\\" 2>/dev/null')\" 2>/dev/null || true",
+            "statusMessage": "Linting..."
+          }
+        ]
+      }
+    ]
+  }
+}
