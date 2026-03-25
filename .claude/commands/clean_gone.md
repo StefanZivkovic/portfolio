@@ -9,11 +9,13 @@ Clean up local branches by switching to main and removing all other branches.
 ## Commands to Execute
 
 1. **Switch to main and pull latest**
+
    ```bash
    git checkout main && git pull
    ```
 
 2. **Remove worktrees and delete all non-main branches**
+
    ```bash
    git fetch --prune
 
