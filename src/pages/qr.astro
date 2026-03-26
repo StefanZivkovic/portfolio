@@ -1,0 +1,48 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  title="QR Code — Stefan Zivkovic"
+  description="Scan to visit stefanzivkovic.dev"
+>
+  <div class="flex flex-col items-center gap-8">
+    <div>
+      <h1 class="text-2xl font-semibold tracking-tight">stefanzivkovic.dev</h1>
+      <p class="mt-1 text-sm" style="color: var(--color-muted)">
+        Scan to visit
+      </p>
+    </div>
+
+    <div class="relative inline-block">
+      <img
+        src="/qr.png"
+        alt="QR code for stefanzivkovic.dev"
+        width="280"
+        height="280"
+        class="rounded-lg"
+      />
+      <div
+        class="absolute inset-0 flex items-center justify-center"
+        aria-hidden="true"
+      >
+        <div
+          class="flex items-center justify-center rounded-md font-mono text-sm font-bold"
+          style="width: 56px; height: 56px; background-color: var(--color-bg); color: var(--color-text); border: 1px solid var(--color-border);"
+        >
+          SZ
+        </div>
+      </div>
+    </div>
+
+    <a
+      href="/"
+      class="font-mono text-sm transition-colors"
+      style="color: var(--color-muted)"
+      onmouseover="this.style.color='var(--color-text)'"
+      onmouseout="this.style.color='var(--color-muted)'"
+    >
+      ← back
+    </a>
+  </div>
+</Layout>
