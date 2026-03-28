@@ -72,9 +72,12 @@ import Layout from "../layouts/Layout.astro";
       showSubResults: false,
     });
 
-    document.getElementById("search-input").addEventListener("input", (e) => {
-      ui.triggerSearch(e.target.value);
-    });
+    const input = document.getElementById("search-input");
+    if (input) {
+      input.addEventListener("input", (e) => {
+        ui.triggerSearch((e.target as HTMLInputElement).value);
+      });
+    }
   };
   script.onerror = () => {
     const el = document.getElementById("search");

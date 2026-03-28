@@ -13,7 +13,13 @@
     "astro": "astro",
     "lint": "oxlint src/",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "prepare": "husky"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.17",
@@ -21,12 +27,21 @@
     "astro": "^6.0.8",
     "tailwindcss": "^4.2.2"
   },
+  "lint-staged": {
+    "*.{astro,ts,js,mjs}": "oxlint",
+    "*.{astro,ts,js,mjs,md,mdx,css,json}": "prettier --write"
+  },
   "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@vitest/ui": "^4.1.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
     "oxlint": "^1.57.0",
     "pagefind": "^1.4.0",
     "prettier": "^3.8.1",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
-    "qrcode": "^1.5.4"
+    "qrcode": "^1.5.4",
+    "vitest": "^4.1.2"
   }
 }
