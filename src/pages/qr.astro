@@ -1,48 +1,59 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import "../styles/global.css";
 ---
 
-<Layout
-  title="QR Code — Stefan Zivkovic"
-  description="Scan to visit stefanzivkovic.dev"
->
-  <div class="flex flex-col items-center gap-8">
-    <div>
-      <h1 class="text-2xl font-semibold tracking-tight">stefanzivkovic.dev</h1>
-      <p class="mt-1 text-sm" style="color: var(--color-muted)">
-        Scan to visit
-      </p>
-    </div>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>QR Code — Stefan Zivkovic</title>
+  </head>
+  <body>
+    <div
+      class="flex min-h-screen flex-col items-center justify-center gap-8 px-6"
+    >
+      <div class="text-center">
+        <h1 class="text-2xl font-semibold tracking-tight">
+          stefanzivkovic.dev
+        </h1>
+        <p class="mt-1 text-sm" style="color: var(--color-muted)">
+          Scan to visit
+        </p>
+      </div>
 
-    <div class="relative inline-block">
-      <img
-        src="/qr.png"
-        alt="QR code for stefanzivkovic.dev"
-        width="280"
-        height="280"
-        class="rounded-lg"
-      />
-      <div
-        class="absolute inset-0 flex items-center justify-center"
-        aria-hidden="true"
-      >
+      <div class="relative inline-block">
+        <img
+          src="/qr.png"
+          alt="QR code for stefanzivkovic.dev"
+          width="400"
+          height="400"
+          class="rounded-lg"
+          style="image-rendering: pixelated;"
+        />
         <div
-          class="flex items-center justify-center rounded-md font-mono text-sm font-bold"
-          style="width: 56px; height: 56px; background-color: var(--color-bg); color: var(--color-text); border: 1px solid var(--color-border);"
+          class="absolute inset-0 flex items-center justify-center"
+          aria-hidden="true"
         >
-          SZ
+          <div
+            class="flex items-center justify-center rounded-md font-mono font-bold"
+            style="width: 72px; height: 72px; font-size: 1.25rem; background-color: var(--color-bg); color: var(--color-text); border: 1px solid var(--color-border);"
+          >
+            SZ
+          </div>
         </div>
       </div>
-    </div>
 
-    <a
-      href="/"
-      class="font-mono text-sm transition-colors"
-      style="color: var(--color-muted)"
-      onmouseover="this.style.color='var(--color-text)'"
-      onmouseout="this.style.color='var(--color-muted)'"
-    >
-      ← back
-    </a>
-  </div>
-</Layout>
+      <a
+        href="/"
+        class="font-mono text-sm transition-colors"
+        style="color: var(--color-muted)"
+        onmouseover="this.style.color='var(--color-text)'"
+        onmouseout="this.style.color='var(--color-muted)'"
+      >
+        ← back
+      </a>
+    </div>
+  </body>
+</html>
