@@ -1,21 +1,21 @@
 ---
 import { getCollection, render } from "astro:content";
 import Layout from "../layouts/Layout.astro";
+import { readingTime } from "../utils/readingTime";
+import { deduplicateTags } from "../utils/tags";
 
 const allPosts = await getCollection("posts", ({ data }) => !data.draft);
 
 const posts = await Promise.all(
   allPosts.map(async (post) => {
     const { remarkPluginFrontmatter } = await render(post);
-    const wordCount = post.body?.split(/\s+/).filter(Boolean).length ?? 0;
-    const readingTime = Math.max(1, Math.round(wordCount / 200));
-    return { ...post, readingTime };
+    return { ...post, readingTime: readingTime(post.body) };
   }),
 );
 
 posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
+const allTags = deduplicateTags(posts.map((p) => p.data.tags));
 ---
 
 <Layout title="Stefan Zivkovic">
@@ -51,6 +51,8 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
         <button
           id="nav-toggle"
           aria-label="Open navigation"
+          aria-expanded="false"
+          aria-controls="nav-overlay"
           class="transition-colors"
           style="color: var(--color-muted); background: none; border: none; cursor: pointer; padding: 0;"
           onmouseover="this.style.color='var(--color-text)'"
@@ -216,7 +218,7 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
     const buttons = document.querySelectorAll<HTMLButtonElement>(".tag-filter");
     const items = document.querySelectorAll<HTMLLIElement>("#post-list > li");
 
-    function setActive(tag: string) {
+    function applyFilter(tag: string) {
       buttons.forEach((btn) => {
         const isActive = btn.dataset.tagFilter === tag;
         btn.style.backgroundColor = isActive
@@ -234,19 +236,47 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
       });
     }
 
+    function setActive(tag: string) {
+      applyFilter(tag);
+      const url = new URL(window.location.href);
+      if (tag === "all") {
+        url.searchParams.delete("tag");
+      } else {
+        url.searchParams.set("tag", tag);
+      }
+      history.pushState(null, "", url);
+    }
+
     buttons.forEach((btn) => {
       btn.addEventListener("click", () => {
         setActive(btn.dataset.tagFilter ?? "all");
       });
     });
 
+    // Restore tag from URL on load
+    const initialTag =
+      new URLSearchParams(window.location.search).get("tag") ?? "all";
+    applyFilter(initialTag);
+
     // Nav menu
     const overlay = document.getElementById("nav-overlay")!;
-    document.getElementById("nav-toggle")!.addEventListener("click", () => {
+    const navToggle = document.getElementById("nav-toggle")!;
+
+    function openNav() {
       overlay.classList.remove("hidden");
-    });
-    document.getElementById("nav-close")!.addEventListener("click", () => {
+      navToggle.setAttribute("aria-expanded", "true");
+    }
+
+    function closeNav() {
       overlay.classList.add("hidden");
+      navToggle.setAttribute("aria-expanded", "false");
+      navToggle.focus();
+    }
+
+    navToggle.addEventListener("click", openNav);
+    document.getElementById("nav-close")!.addEventListener("click", closeNav);
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) closeNav();
     });
   </script>
 </Layout>
