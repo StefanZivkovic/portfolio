@@ -1,0 +1,131 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  title="About — Stefan Zivkovic"
+  description="Software engineer. Writing about code, systems, and whatever else seems worth exploring."
+>
+  <header class="mb-16">
+    <div class="flex items-center justify-between">
+      <p class="font-mono text-sm" style="color: var(--color-accent)">
+        stefanzivkovic.dev
+      </p>
+      <a
+        href="/"
+        class="font-mono text-xs transition-colors"
+        style="color: var(--color-muted)"
+        onmouseover="this.style.color='var(--color-text)'"
+        onmouseout="this.style.color='var(--color-muted)'"
+      >
+        ← home
+      </a>
+    </div>
+    <h1 class="mt-4 text-2xl font-semibold tracking-tight">Stefan Zivkovic</h1>
+    <p class="mt-2 text-sm" style="color: var(--color-muted)">
+      Software engineer. Writing about code, systems, and whatever else seems
+      worth exploring.
+    </p>
+  </header>
+
+  <div class="space-y-12">
+    <section>
+      <h2
+        class="mb-4 font-mono text-xs tracking-widest uppercase"
+        style="color: var(--color-muted)"
+      >
+        About
+      </h2>
+      <div class="space-y-3 text-sm leading-relaxed">
+        <p>
+          I'm a software engineer based in [location]. I work on [what you work
+          on]. This site is where I write about things I find interesting —
+          mostly code, systems, and the occasional tangent.
+        </p>
+        <p>
+          Feel free to reach out if you want to talk about anything on here.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2
+        class="mb-4 font-mono text-xs tracking-widest uppercase"
+        style="color: var(--color-muted)"
+      >
+        Contact
+      </h2>
+      <ul class="space-y-2 font-mono text-sm">
+        <li>
+          <a
+            href="mailto:your@email.com"
+            class="transition-colors"
+            style="color: var(--color-text)"
+            onmouseover="this.style.color='var(--color-accent)'"
+            onmouseout="this.style.color='var(--color-text)'"
+          >
+            email →
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://github.com/StefanZivkovic"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="transition-colors"
+            style="color: var(--color-text)"
+            onmouseover="this.style.color='var(--color-accent)'"
+            onmouseout="this.style.color='var(--color-text)'"
+          >
+            github →
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://linkedin.com/in/stefanzivkovic"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="transition-colors"
+            style="color: var(--color-text)"
+            onmouseover="this.style.color='var(--color-accent)'"
+            onmouseout="this.style.color='var(--color-text)'"
+          >
+            linkedin →
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2
+        class="mb-4 font-mono text-xs tracking-widest uppercase"
+        style="color: var(--color-muted)"
+      >
+        Share
+      </h2>
+      <a href="/qr" class="group inline-block">
+        <div
+          class="relative inline-block overflow-hidden rounded-lg transition-opacity group-hover:opacity-80"
+        >
+          <img
+            src="/qr.png"
+            alt="QR code for stefanzivkovic.dev"
+            width="120"
+            height="120"
+          />
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div
+              class="flex items-center justify-center rounded font-mono text-xs font-bold"
+              style="width: 26px; height: 26px; background-color: var(--color-bg); color: var(--color-text);"
+            >
+              SZ
+            </div>
+          </div>
+        </div>
+        <p class="mt-2 font-mono text-xs" style="color: var(--color-muted)">
+          scan or tap to share
+        </p>
+      </a>
+    </section>
+  </div>
+</Layout>
