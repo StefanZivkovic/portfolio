@@ -80,23 +80,32 @@ const description =
     color: var(--color-text);
     max-width: none;
   }
-  .prose p {
-    margin-bottom: 1.25rem;
+  .prose :global(p) {
+    margin-bottom: 1.75rem;
     line-height: 1.8;
   }
-  .prose h2,
-  .prose h3 {
+  .prose :global(h2) {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+    color: var(--color-text);
+  }
+  .prose :global(h3) {
+    font-size: 1.05rem;
     font-weight: 600;
     margin-top: 2rem;
     margin-bottom: 0.75rem;
     letter-spacing: -0.01em;
+    color: var(--color-text);
   }
-  .prose a {
+  .prose :global(a) {
     color: var(--color-accent);
     text-decoration: underline;
     text-underline-offset: 3px;
   }
-  .prose code {
+  .prose :global(code) {
     font-family: var(--font-mono);
     font-size: 0.875em;
     background-color: var(--color-surface);
@@ -104,7 +113,7 @@ const description =
     padding: 0.15em 0.4em;
     border-radius: 4px;
   }
-  .prose pre {
+  .prose :global(pre) {
     background-color: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: 8px;
@@ -112,17 +121,32 @@ const description =
     overflow-x: auto;
     margin-bottom: 1.25rem;
   }
-  .prose pre code {
+  .prose :global(pre code) {
     background: none;
     border: none;
     padding: 0;
     font-size: 0.875rem;
   }
-  .prose blockquote {
+  .prose :global(blockquote) {
     border-left: 2px solid var(--color-accent);
     padding-left: 1rem;
     color: var(--color-muted);
     font-style: italic;
     margin-bottom: 1.25rem;
+  }
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin-bottom: 1.75rem;
+    padding-left: 1.5rem;
+  }
+  .prose :global(ul) {
+    list-style-type: disc;
+  }
+  .prose :global(ol) {
+    list-style-type: decimal;
+  }
+  .prose :global(li) {
+    margin-bottom: 0.4rem;
+    line-height: 1.8;
   }
 </style>
