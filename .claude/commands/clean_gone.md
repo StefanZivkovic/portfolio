@@ -2,11 +2,6 @@
 description: Switch to main, pull latest, prune gone branches, then ask user which remaining branches to delete.
 ---
 
-## Context
-
-- Local branches: !`git branch`
-- Gone branches (remote deleted): !`git fetch --prune 2>/dev/null; git branch -vv | grep '\[gone\]' | awk '{print $1}'`
-
 ## Your Task
 
 1. **Switch to main and pull latest**
@@ -15,11 +10,24 @@ description: Switch to main, pull latest, prune gone branches, then ask user whi
    git checkout main && git pull
    ```
 
-2. **Delete all [gone] branches** (remote has been deleted) without asking.
+2. **Fetch and list branch state**
 
-3. **If there are remaining non-main branches**, present them as a numbered list and ask the user which ones to delete. Wait for their response before deleting anything. Accept "all", "none", or specific numbers/names.
+   ```bash
+   git fetch --prune
+   git branch -vv
+   ```
 
-4. Delete the branches the user selected.
+3. **Delete all [gone] branches** (those marked `[gone]` in the output above) without asking.
+
+4. **List remaining non-main branches**
+
+   ```bash
+   git branch
+   ```
+
+   If there are any, present them as a numbered list and ask the user which ones to delete. Wait for their response before deleting anything. Accept "all", "none", or specific numbers/names.
+
+5. Delete the branches the user selected.
 
 ## Expected Behavior
 
