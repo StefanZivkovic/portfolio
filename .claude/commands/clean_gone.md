@@ -1,12 +1,13 @@
 ---
-description: Switch to main, pull latest, delete all non-main local branches (including gone ones and their worktrees).
+description: Switch to main, pull latest, prune gone branches, then ask user which remaining branches to delete.
 ---
 
+## Context
+
+- Local branches: !`git branch`
+- Gone branches (remote deleted): !`git fetch --prune 2>/dev/null; git branch -vv | grep '\[gone\]' | awk '{print $1}'`
+
 ## Your Task
-
-Clean up local branches by switching to main and removing all other branches.
-
-## Commands to Execute
 
 1. **Switch to main and pull latest**
 
@@ -14,27 +15,15 @@ Clean up local branches by switching to main and removing all other branches.
    git checkout main && git pull
    ```
 
-2. **Remove worktrees and delete all non-main branches**
+2. **Delete all [gone] branches** (remote has been deleted) without asking.
 
-   ```bash
-   git fetch --prune
+3. **If there are remaining non-main branches**, present them as a numbered list and ask the user which ones to delete. Wait for their response before deleting anything. Accept "all", "none", or specific numbers/names.
 
-   # Delete [gone] branches (worktrees first)
-   git branch -vv | grep '\[gone\]' | sed 's/^[+* ]*//' | awk '{print $1}' | while read branch; do
-     worktree=$(git worktree list | grep "\[$branch\]" | awk '{print $1}')
-     if [ ! -z "$worktree" ] && [ "$worktree" != "$(git rev-parse --show-toplevel)" ]; then
-       git worktree remove --force "$worktree"
-     fi
-     git branch -D "$branch"
-   done
-
-   # Delete all remaining non-main branches
-   git branch | grep -v '^\* main' | xargs -r git branch -d
-   ```
+4. Delete the branches the user selected.
 
 ## Expected Behavior
 
 - Switched to main and pulled latest
-- All non-main local branches deleted
-- Worktrees for gone branches removed
-- Report what was cleaned up, or confirm nothing needed cleaning
+- Gone branches deleted automatically
+- User prompted to pick which remaining branches to remove
+- Report what was cleaned up

@@ -29,15 +29,11 @@ npm run format:check  # check formatting without writing (CI)
 
 ## Slash commands
 
-- `/commit` — stage and commit changes with an auto-generated message
 - `/commit-push-pr` — commit, push, and open a GitHub PR in one step
 - `/clean_gone` — prune local branches deleted from remote
-- `/lint` — run oxlint and report issues
-- `/format` — run Prettier and apply formatting
 
 ## Conventions
 
 - **Commits**: conventional commits style (`feat:`, `fix:`, `content:`, `chore:`, etc.)
-- **Linting**: run `/lint` before committing new code (not required for content/markdown edits)
-- **Formatting**: run `/format` before committing; Prettier handles `.astro`, `.ts`, `.js`, `.md`, `.mdx`, `.css` files
+- **Formatting/Linting**: runs automatically on every file Claude writes or edits (PostToolUse hooks); run `npm run format` or `npm run lint` manually if needed
 - **Content**: blog posts live in `src/content/` as Markdown or MDX files with typed frontmatter via Astro content collections
