@@ -36,5 +36,36 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <div class="mx-auto max-w-2xl px-6 py-16">
       <slot />
     </div>
+
+    <button
+      id="scroll-top"
+      aria-label="Scroll to top"
+      class="fixed right-6 bottom-6 hidden rounded-full p-2.5 transition-opacity hover:opacity-80"
+      style="background-color: var(--color-border); border: 1px solid var(--color-muted); color: var(--color-text);"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="m18 15-6-6-6 6"></path>
+      </svg>
+    </button>
+
+    <script>
+      const btn = document.getElementById("scroll-top")!;
+      window.addEventListener("scroll", () => {
+        btn.classList.toggle("hidden", window.scrollY < 300);
+      });
+      btn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    </script>
   </body>
 </html>
