@@ -1,7 +1,7 @@
 ---
-title: "Two Commands That Replaced a Lot of Manual Git Work"
+title: "Two Claude Commands That Replaced a Lot of Manual Git Work"
 date: 2026-03-31
-tags: ["git", "workflow", "tooling"]
+tags: ["git", "workflow", "claude", "ai"]
 description: "How two Claude Code slash commands changed the way I handle git — not by doing something new, but by removing the friction from things I was already doing."
 ---
 
