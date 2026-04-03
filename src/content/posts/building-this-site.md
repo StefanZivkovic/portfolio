@@ -1,11 +1,11 @@
 ---
 title: "Building This Site with Astro, Tailwind, and Claude Code"
 date: 2026-03-28
-tags: ["astro", "ai", "testing", "meta"]
+tags: ["astro", "ai"]
 description: "How I built this portfolio site — the stack, the tooling, and what it looks like to build with AI assistance from first commit to CI/CD."
 ---
 
-This site is a static portfolio and blog built with Astro javascript library. This post covers how it was built, the tools involved, and what the development process looked like with Claude Code as a collaborator throughout.
+This site is a static portfolio and blog built with Astro. This post covers how it was built, the tools involved, and what the development process looked like with Claude Code as a collaborator throughout.
 
 ## The Stack
 
@@ -25,7 +25,7 @@ This site is a static portfolio and blog built with Astro javascript library. Th
 
 **[Husky](https://typicode.github.io/husky) + [lint-staged](https://github.com/lint-staged/lint-staged)** — git hooks. Pre-commit runs Prettier and oxlint on staged files, then the full unit test suite.
 
-**Vercel** — deployment. Connected to the GitHub repo. Every merge to `main` triggers a production deploy.
+**[Vercel](https://vercel.com)** — deployment. Connected to the GitHub repo. Every merge to `main` triggers a production deploy.
 
 ## The Development Process
 
@@ -41,12 +41,7 @@ A few things that worked well in practice:
 
 **CI as a safety net, not a gate.** The GitHub Actions workflow runs on every PR: format check, lint, unit tests, build, e2e tests. It's not there to slow things down — it's there to catch the things that slip through when you're moving quickly.
 
-**Slash commands for repetitive git work.** Claude Code supports custom slash commands — scripts that expand into full prompts. Two that became part of the daily workflow here:
-
-- `/commit-push-pr` — stages changes, writes a conventional commit message, creates a branch, pushes, and opens a GitHub PR. What would normally be four or five git commands and a browser tab becomes one instruction.
-- `/clean_gone` — switches to `main`, pulls latest, prunes remote-tracking branches, and deletes any local branches whose remotes are gone. Keeps the local branch list clean after PRs are merged without having to do it manually.
-
-These aren't magic — they're just prompts that encode a repeatable process. But having them means the overhead of doing things properly (branching, PRs, cleanup) is low enough that you actually do it every time.
+**Slash commands for repetitive git work.** Claude Code supports custom slash commands — scripts that expand into full prompts. Two that became part of the daily workflow here: `/commit-push-pr` and `/clean_gone` — covered in more detail in a [separate post](/posts/git-commands-that-replaced-manual-work).
 
 ## What's on the Site
 
