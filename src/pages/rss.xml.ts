@@ -10,7 +10,7 @@ export async function GET(context: APIContext) {
   return rss({
     title: "Stefan Zivkovic",
     description:
-      "Software engineer writing about code, systems, and whatever else seems worth exploring.",
+      "Software engineer writing about code, systems, books, and some other interesting topics.",
     site: context.site!,
     items: posts.map((post) => ({
       title: post.data.title,
