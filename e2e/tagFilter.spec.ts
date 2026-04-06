@@ -45,6 +45,6 @@ test("tag filter restores from URL on load", async ({ page }) => {
 
   await expect(firstTagButton).toHaveCSS(
     "background-color",
-    "rgb(124, 106, 247)",
+    "rgb(42, 100, 150)",
   );
 });
